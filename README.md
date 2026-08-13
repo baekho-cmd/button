@@ -61,7 +61,7 @@ CSS를 공부하면서 만든 버튼 컬렉션입니다.
 
 예시: `<button class="btn btn-neon">Neon</button>`
 
-해당 버튼에 필요한 CSS도 함께 추가하면 됩니다.
+해당 버튼에 필요한 CSS도 함께 추가하면 됩니다. (예: btn, btn-neon 등의 클래스)
 
 ### 라이선스
 
@@ -128,7 +128,7 @@ Open `index.html`, or copy the HTML and CSS of the button you want to use into y
 
 For example: `<button class="btn btn-neon">Neon</button>`
 
-Then include the corresponding CSS for the button.
+Then include the corresponding CSS for the button. (e.g., classes such as btn, btn-neon, etc.)
 
 ### License
 
