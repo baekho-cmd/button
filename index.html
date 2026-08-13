@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>button</title>
+  <style>
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(168, 85, 247, 0.28), transparent 30%),
+        radial-gradient(circle at 80% 0%, rgba(34, 211, 238, 0.24), transparent 26%),
+        linear-gradient(135deg, #0b1020 0%, #111827 55%, #090d18 100%);
+      font-family: Arial, sans-serif;
+      padding: 48px 20px;
+    }
+
+    .button-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 22px;
+      max-width: 900px;
+    }
+
+    .btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.9em 1.5em;
+      min-width: fit-content;
+      border: none;
+      font-size: clamp(0.7rem, 0.7vw + 0.55rem, 0.95rem);
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform 0.24s ease, box-shadow 0.24s ease, filter 0.24s ease, border-color 0.24s ease;
+      isolation: isolate;
+      white-space: nowrap;
+      overflow: hidden;
+      box-shadow: 0 12px 22px rgba(15, 23, 42, 0.18);
+    }
+
+    .btn::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      z-index: -1;
+    }
+
+    .btn:hover {
+      transform: translateY(-4px) scale(1.02);
+    }
+
+    .btn:active {
+      transform: translateY(1px) scale(0.98);
+    }
+
+    /* Neon */
+    .btn-neon {
+      color: #fff;
+      background: linear-gradient(135deg, #ff5ec4 0%, #8a5cff 32%, #00d4ff 100%);
+      border-radius: 999px;
+      box-shadow: 0 18px 32px rgba(138, 92, 255, 0.45), 0 0 22px rgba(255, 94, 196, 0.5);
+      overflow: hidden;
+    }
+
+    .btn-neon::before {
+      inset: 4px;
+      border-radius: 999px;
+      background: linear-gradient(120deg, rgba(255,255,255,0.82), rgba(255,255,255,0), rgba(255,255,255,0.7));
+      transform: translateX(-135%) skewX(-20deg);
+      transition: transform 0.8s ease;
+    }
+
+    .btn-neon:hover::before {
+      transform: translateX(135%) skewX(-20deg);
+    }
+
+    /* Glass */
+    .btn-glass {
+      color: #edf7ff;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.26);
+      border-radius: 16px;
+      backdrop-filter: blur(10px);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.4), 0 18px 28px rgba(15, 23, 42, 0.34);
+    }
+
+    .btn-glass::before {
+      background: linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0));
+      border-radius: 16px;
+    }
+
+    .btn-glass:hover {
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.52), 0 22px 34px rgba(59, 130, 246, 0.26);
+    }
+
+    /* Soft */
+    .btn-soft {
+      color: #3d2b54;
+      background: linear-gradient(135deg, #ffdfe6 0%, #dfeeff 48%, #e7ffd9 100%);
+      border-radius: 18px;
+      box-shadow: 0 16px 30px rgba(168, 140, 245, 0.22);
+    }
+
+    .btn-soft::before {
+      background: linear-gradient(180deg, rgba(255,255,255,0.48), rgba(255,255,255,0));
+      border-radius: 18px;
+    }
+
+    /* Mint */
+    .btn-mint {
+      color: #083b2f;
+      background: linear-gradient(135deg, #a7f3d0 0%, #67e8f9 100%);
+      border-radius: 999px;
+      box-shadow: 0 16px 28px rgba(16, 185, 129, 0.22);
+    }
+
+    .btn-mint::before {
+      background: linear-gradient(180deg, rgba(255,255,255,0.5), rgba(255,255,255,0));
+      border-radius: 999px;
+    }
+
+    /* Gold */
+    .btn-gold {
+      color: #fffaf0;
+      background: linear-gradient(135deg, #111827 0%, #2d2416 34%, #d4af37 100%);
+      border: 1px solid rgba(255, 215, 120, 0.6);
+      border-radius: 12px;
+      box-shadow: 0 16px 30px rgba(212, 175, 55, 0.18);
+    }
+
+    .btn-gold::before {
+      background: linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0));
+      border-radius: 12px;
+    }
+
+    /* Outline */
+    .btn-outline {
+      color: #f8fbff;
+      background: rgba(255,255,255,0.02);
+      border: 2px solid rgba(255,255,255,0.8);
+      border-radius: 999px;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.12), 0 0 0 1px rgba(255,255,255,0.04);
+      overflow: hidden;
+    }
+
+    .btn-outline::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0));
+      opacity: 0.6;
+      z-index: -1;
+    }
+
+    .btn-outline:hover {
+      background: rgba(255,255,255,0.05);
+      box-shadow: 0 0 0 4px rgba(255,255,255,0.08), inset 0 0 0 1px rgba(255,255,255,0.2);
+    }
+
+    /* Prism */
+    .btn-prism {
+      color: #f8faff;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 35%, #3b82f6 65%, #8b5cf6 100%);
+      border-radius: 18px;
+      box-shadow: 0 18px 30px rgba(59, 130, 246, 0.22), inset 0 1px 0 rgba(255,255,255,0.25);
+    }
+
+    .btn-prism::before {
+      inset: 4px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.22), rgba(255,255,255,0.04), rgba(255,255,255,0.14));
+      opacity: 0.9;
+    }
+
+    /* Sunset */
+    .btn-sunset {
+      color: #fff;
+      background: linear-gradient(135deg, #ff7b54 0%, #ff4d6d 38%, #7c3aed 100%);
+      border-radius: 18px;
+      box-shadow: 0 18px 30px rgba(244, 114, 182, 0.22);
+    }
+
+    .btn-sunset::before {
+      background: linear-gradient(180deg, rgba(255,255,255,0.34), rgba(255,255,255,0));
+      border-radius: 18px;
+    }
+
+    /* Ice */
+    .btn-ice {
+      color: #0f172a;
+      background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 35%, #bfdbfe 70%, #e0f2fe 100%);
+      border: 1px solid rgba(125, 211, 252, 0.7);
+      border-radius: 999px;
+      box-shadow: 0 16px 28px rgba(125, 211, 252, 0.22), inset 0 1px 0 rgba(255,255,255,0.66);
+      overflow: hidden;
+    }
+
+    .btn-ice::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(180deg, rgba(255,255,255,0.7), rgba(255,255,255,0));
+      opacity: 0.75;
+      z-index: -1;
+    }
+
+    /* Lava */
+    .btn-lava {
+      color: #fff7ed;
+      background: linear-gradient(135deg, #f97316 0%, #ef4444 35%, #7f1d1d 100%);
+      border-radius: 12px;
+      box-shadow: 0 18px 30px rgba(239, 68, 68, 0.24);
+    }
+
+    .btn-lava::before {
+      inset: 4px;
+      border-radius: 12px;
+      background: linear-gradient(120deg, rgba(255,255,255,0.38), rgba(255,255,255,0), rgba(255,255,255,0.2));
+      transform: translateX(-120%) skewX(-20deg);
+      transition: transform 0.8s ease;
+    }
+
+    .btn-lava:hover::before {
+      transform: translateX(120%) skewX(-20deg);
+    }
+
+    /* Emerald */
+    .btn-emerald {
+      color: #ecfdf5;
+      background: linear-gradient(135deg, #10b981 0%, #34d399 50%, #6ee7b7 100%);
+      border-radius: 999px;
+      box-shadow: 0 18px 30px rgba(16, 185, 129, 0.24);
+    }
+
+    /* Deep ocean */
+    .btn-ocean {
+      color: #dbeafe;
+      background: linear-gradient(135deg, #0f172a 0%, #1d4ed8 45%, #0ea5e9 100%);
+      border-radius: 16px;
+      border: 1px solid rgba(125, 211, 252, 0.35);
+      box-shadow: 0 18px 35px rgba(37, 99, 235, 0.24);
+    }
+
+    /* Rose */
+    .btn-rose {
+      color: #fff1f2;
+      background: linear-gradient(135deg, #fb7185 0%, #f43f5e 45%, #be185d 100%);
+      border-radius: 999px;
+      box-shadow: 0 18px 32px rgba(244, 63, 94, 0.24);
+    }
+
+    /* Smoke */
+    .btn-smoke {
+      color: #e2e8f0;
+      background: linear-gradient(135deg, #1f2937 0%, #475569 100%);
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      border-radius: 18px;
+      box-shadow: 0 15px 28px rgba(15, 23, 42, 0.34);
+    }
+
+    /* Violet */
+    .btn-violet {
+      color: #f5f3ff;
+      background: linear-gradient(135deg, #7c3aed 0%, #a78bfa 48%, #ddd6fe 100%);
+      border-radius: 12px;
+      box-shadow: 0 18px 30px rgba(124, 58, 237, 0.26);
+    }
+
+    /* Cyan */
+    .btn-cyan {
+      color: #042f2e;
+      background: linear-gradient(135deg, #a5f3fc 0%, #67e8f9 50%, #22d3ee 100%);
+      border-radius: 999px;
+      box-shadow: 0 18px 30px rgba(34, 211, 238, 0.22);
+    }
+
+    /* Pixel */
+    .btn-pixel {
+      color: #f8fafc;
+      background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+      border: 2px solid #f8fafc;
+      border-radius: 0;
+      box-shadow: 6px 6px 0 #38bdf8;
+      letter-spacing: 0.18em;
+    }
+
+    .btn-pixel:hover {
+      box-shadow: 8px 8px 0 #f472b6;
+    }
+
+    /* Spark */
+    .btn-spark {
+      color: #fff;
+      background: linear-gradient(135deg, #fbbf24 0%, #f97316 40%, #ef4444 100%);
+      border-radius: 999px;
+      box-shadow: 0 0 0 3px rgba(255,255,255,0.12), 0 18px 36px rgba(249, 115, 22, 0.25);
+    }
+
+    .btn-spark::before {
+      inset: 2px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9), rgba(255,255,255,0) 35%);
+    }
+
+    /* Coral */
+    .btn-coral {
+      color: #fff;
+      background: linear-gradient(135deg, #fdba74 0%, #fb7185 45%, #f43f5e 100%);
+      border-radius: 16px;
+      box-shadow: 0 18px 32px rgba(251, 113, 133, 0.2);
+    }
+
+    /* Silver */
+    .btn-silver {
+      color: #0f172a;
+      background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 35%, #f8fafc 100%);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      border-radius: 999px;
+      box-shadow: 0 18px 30px rgba(148, 163, 184, 0.2);
+    }
+
+    /* Forest */
+    .btn-forest {
+      color: #ecfdf5;
+      background: linear-gradient(135deg, #14532d 0%, #166534 35%, #4ade80 100%);
+      border-radius: 12px;
+      box-shadow: 0 18px 30px rgba(34, 197, 94, 0.2);
+    }
+
+    /* Midnight */
+    .btn-midnight {
+      color: #e2e8f0;
+      background: linear-gradient(135deg, #020617 0%, #111827 38%, #334155 100%);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      border-radius: 18px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.2), 0 20px 34px rgba(15, 23, 42, 0.42);
+    }
+
+    /* Lavender */
+    .btn-lavender {
+      color: #f5f3ff;
+      background: linear-gradient(135deg, #c4b5fd 0%, #a78bfa 44%, #7c3aed 100%);
+      border-radius: 999px;
+      box-shadow: 0 18px 30px rgba(167, 139, 250, 0.2);
+    }
+
+    /* Peach */
+    .btn-peach {
+      color: #431407;
+      background: linear-gradient(135deg, #fde68a 0%, #fdba74 38%, #fca5a5 100%);
+      border-radius: 999px;
+      box-shadow: 0 18px 30px rgba(251, 146, 60, 0.18);
+    }
+
+    /* Electric */
+    .btn-electric {
+      color: #ecfeff;
+      background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 50%, #8b5cf6 100%);
+      border-radius: 999px;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.2), 0 18px 36px rgba(59, 130, 246, 0.28);
+    }
+
+    /* Cherry */
+    .btn-cherry {
+      color: #fff1f2;
+      background: linear-gradient(135deg, #be123c 0%, #e11d48 45%, #f43f5e 100%);
+      border-radius: 999px;
+      box-shadow: 0 18px 30px rgba(225, 29, 72, 0.22);
+    }
+  </style>
+</head>
+<body>
+  <div class="button-wrap">
+    <button class="btn btn-neon">Neon</button>
+    <button class="btn btn-glass">Glass</button>
+    <button class="btn btn-soft">Soft</button>
+    <button class="btn btn-mint">Mint</button>
+    <button class="btn btn-gold">Gold</button>
+    <button class="btn btn-outline">Outline</button>
+    <button class="btn btn-prism">Prism</button>
+    <button class="btn btn-sunset">Sunset</button>
+    <button class="btn btn-ice">Ice</button>
+    <button class="btn btn-lava">Lava</button>
+    <button class="btn btn-emerald">Emerald</button>
+    <button class="btn btn-ocean">Ocean</button>
+    <button class="btn btn-rose">Rose</button>
+    <button class="btn btn-smoke">Smoke</button>
+    <button class="btn btn-violet">Violet</button>
+    <button class="btn btn-cyan">Cyan</button>
+    <button class="btn btn-pixel">Pixel</button>
+    <button class="btn btn-spark">Spark</button>
+    <button class="btn btn-coral">Coral</button>
+    <button class="btn btn-silver">Silver</button>
+    <button class="btn btn-forest">Forest</button>
+    <button class="btn btn-midnight">Midnight</button>
+    <button class="btn btn-lavender">Lavender</button>
+    <button class="btn btn-peach">Peach</button>
+    <button class="btn btn-electric">Electric</button>
+    <button class="btn btn-cherry">Cherry</button>
+  </div>
+</body>
+</html>
